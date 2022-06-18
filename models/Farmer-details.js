@@ -25,7 +25,7 @@ const FarmerSchema = new mongoose.Schema({
     },
 
     password: {
-        type: alphanum,
+        type: Number,
         required: [true, 'Password is required'],
         minlength: 6
     },
