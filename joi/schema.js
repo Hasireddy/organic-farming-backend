@@ -1,24 +1,21 @@
-// import Joi from 'joi'; //https://joi.dev/api/?v=17.6.0
+const Joi = require('joi'); //https://joi.dev/api/?v=17.6.0
 
-// export const farmerSchema = Joi.object({
-//     firstName: Joi.string().required(),
-//     lastName: Joi.string().required(),
-//     email: Joi.string().required(),
-//     password: Joi.alphanum()
-//         .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
-//     address: Joi.string().required(),
-//     certificationNum: Joi.string().required(),
-//     postcode: Joi.string().required()
+const farmerSchema = Joi.object({
+    firstname: Joi.string().required(),
+    lastname: Joi.string().required(),
+    email: Joi.string().required(),
+    password: Joi.string().alphanum().min(6).max(12).required(),
+    address: Joi.string().required(),
+    certificationNum: Joi.number().required(),
+    postcode: Joi.number().required()
 
-// });
+});
 
-// export const siginSchema = Joi.object({
-//   email: Joi.string().required(),
-//   password: Joi.string().alphanum().min(8).max(12).required()
-// });
 
-// export const postSchema = Joi.object({
-//   title: Joi.string().required(),
-//   image: Joi.string().required(),
-//   body: Joi.string().required()
-// });
+const signinSchema = Joi.object({
+    email: Joi.string().required(),
+    password: Joi.string().alphanum().min(6).max(12).required()
+});
+
+
+module.exports = { farmerSchema, signinSchema };
