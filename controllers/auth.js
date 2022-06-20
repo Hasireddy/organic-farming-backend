@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const Farmer = require('../models/Farmer-schema.js');
+const Product = require('../models/Product-schema.js');
 const asyncHandler = require('../utils/asyncHandler.js');
 const ErrorResponse = require('../utils/ErrorResponse.js');
 const verifyToken = require('../middlewares/verifyToken.js');
@@ -67,5 +68,14 @@ const getFarmer = asyncHandler(async (req, res, next) => {
     // res.json({ success: "This is the Farmer" });
 });
 
+const productDetails = asyncHandler(async (req, res, next) => {
+    const { body: { ProductName, Description, ...rest } } = req;
+    const found = await Product.findOne({ ProductName });
+    if (found) { throw new ErrorResponse('ProductName already exists', 403); }
+    const product = await Product.create({ ...rest, ProductName, Description });
+    res.json({ product: product });
+    console.log(product);
+});
 
-module.exports = { registerFarmer, loginFarmer, getFarmer };
+
+module.exports = { registerFarmer, loginFarmer, getFarmer, productDetails };

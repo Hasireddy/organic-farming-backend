@@ -1,8 +1,4 @@
 const mongoose = require('mongoose');
-// const { rootCertificates } = require('tls');
-// import mongoose from 'mongoose';
-
-// const { Schema,model} = mongoose;
 
 const FarmerSchema = new mongoose.Schema({
     firstname: {
