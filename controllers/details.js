@@ -11,8 +11,14 @@ const getAllProducts = asyncHandler(async (req, res, next) => {
 
 
 const createProduct = asyncHandler(async (req, res, next) => {
-    const { body } = req;
-    const newProduct = await (await Product.create({ ...body }));
+    const { body, file, farmerId } = req;
+    const tempProductName = body.ProductName;
+    console.log(farmerId);
+    const found = await Product.findOne({ 'ProductName': tempProductName });
+    //console.log(found);
+    if (found) { throw new ErrorResponse('ProductName already exists', 403); }
+    const newProduct = await (await Product.create({ ...body, Image: file, farmerId: farmerId }));
+    //console.log('New Added Product =', newProduct);
     res.status(201).json(newProduct);
 });
 

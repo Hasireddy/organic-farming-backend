@@ -26,25 +26,18 @@ const productSchema = new mongoose.Schema(
             minlength: 5,
             maxlength: 255
         },
-        FarmAddress: {
-            type: String,
-            required: [true, 'Address is required'],
+
+        Image:
+        {
+            type: Object,
+            required: [true, 'Image is required']
         },
 
-        postcode: {
-            type: Number,
-            required: [true, 'Postal code is required']
+        farmerId:
+        {
+            type: String,
+            required: [false, 'FarmerId is required'],
         }
-        // farmerId: {
-        //     type: Number,
-        //     required: [true, 'FarmerId code is required']
-        // }
-
-        // Image:
-        // {
-        //     type: Image,
-        //     required: [true, 'Image is required']
-        // }
     });
 
 module.exports = mongoose.model("Product", productSchema);

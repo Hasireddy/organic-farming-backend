@@ -8,6 +8,5 @@ const authRouter = Router();
 authRouter.post('/signup', validateJOI(farmerSchema), registerFarmer);
 authRouter.post('/signin', validateJOI(signinSchema), loginFarmer);
 authRouter.get('/me', verifyToken, getFarmer);
-authRouter.post('/productdetails', validateJOI(productSchema), productDetails);
 
 module.exports = authRouter;
