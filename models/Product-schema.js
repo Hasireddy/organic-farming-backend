@@ -25,16 +25,8 @@ const productSchema = new mongoose.Schema(
             required: [true, 'Category is required'],
             minlength: 5,
             maxlength: 255
-        },
-        FarmAddress: {
-            type: String,
-            required: [true, 'Address is required'],
-        },
-
-        postcode: {
-            type: Number,
-            required: [true, 'Postal code is required']
         }
+
         // farmerId: {
         //     type: Number,
         //     required: [true, 'FarmerId code is required']

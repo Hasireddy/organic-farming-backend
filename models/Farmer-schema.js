@@ -31,10 +31,7 @@ const FarmerSchema = new mongoose.Schema({
         required: [true, 'Address is required']
     },
 
-    certificationNum: {
-        type: Number,
-        required: [true, 'Certification Number is required'],
-    },
+   
 
     postcode: {
         type: Number,
