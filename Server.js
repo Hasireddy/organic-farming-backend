@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 const port = process.env.PORT || 5000;
 require('dotenv').config()
 require('colors')
@@ -21,6 +22,10 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 app.use(cors({ origin: '*' }));
+app.use('/uploads', express.static('uploads')); // It makes uploads Folder publicly appear http://localhost:5000/uploads/peppers-1-300x300.jpg to view image in Browser.
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.use('/auth', authRouter);
 app.use('/posts', postsRouter);
