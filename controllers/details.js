@@ -1,11 +1,12 @@
 const express = require('express');
 const Product = require('../models/Product-schema.js');
+const Farmer = require('../models/Farmer-schema.js');
 const asyncHandler = require('../utils/asyncHandler.js');
 const ErrorResponse = require('../utils/ErrorResponse.js');
 
 
 const getAllProducts = asyncHandler(async (req, res, next) => {
-    const posts = await Product.find();
+    const posts = await Product.find().populate('farmer');
     res.json(posts);
 });
 
@@ -13,12 +14,13 @@ const getAllProducts = asyncHandler(async (req, res, next) => {
 const createProduct = asyncHandler(async (req, res, next) => {
     const { body, file, farmerId } = req;
     const tempProductName = body.ProductName;
-    console.log(farmerId);
-    const found = await Product.findOne({ 'ProductName': tempProductName });
+    // console.log(req);
+    const found = await Product.findOne({ 'ProductName': tempProductName, 'farmer': farmerId });
     //console.log(found);
     if (found) { throw new ErrorResponse('ProductName already exists', 403); }
-    const newProduct = await (await Product.create({ ...body, Image: file, farmerId: farmerId }));
-    //console.log('New Added Product =', newProduct);
+    let newProduct = await Product.create({ ...body, Image: file, farmer: farmerId });
+    newProduct = await newProduct.populate('farmer');
+    console.log('New Added Product =', newProduct);
     res.status(201).json(newProduct);
 });
 

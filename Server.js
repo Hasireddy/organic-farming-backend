@@ -11,9 +11,7 @@ require('colors')
 const authRouter = require('./routes/authRouter.js');
 const postsRouter = require('./routes/postsRouter.js');
 const productsRouter = require('./routes/productsRouter.js');
-
 const errorHandler = require('./middlewares/errorHandler.js');
-
 const connectDB = require('./dbconnect.js');
 const { getEventListeners } = require('events');
 connectDB()
@@ -30,9 +28,9 @@ app.use(bodyParser.json());
 app.use('/auth', authRouter);
 app.use('/posts', postsRouter);
 app.use('/details', productsRouter);
-
 app.use('*', (req, res) => res.sendStatus(404));
 app.use(errorHandler);
+
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`)

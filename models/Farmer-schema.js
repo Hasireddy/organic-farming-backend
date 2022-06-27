@@ -34,7 +34,30 @@ const FarmerSchema = new mongoose.Schema({
     postcode: {
         type: Number,
         required: [true, 'Postal code is required']
+
+    },
+    countrycode: {
+        type: String,
+        required: [true, 'Country code is required'],
+        minlength: 2,
+        maxlength: 2
+    },
+    location: {
+        type: {
+            type: String,
+            enum: ['Point']
+        },
+        coordinates: {
+            type: [Number],
+            index: '2dsphere'
+        },
+        formattedAddress: String
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
     }
+
 });
 
 module.exports = mongoose.model("Farmer", FarmerSchema);

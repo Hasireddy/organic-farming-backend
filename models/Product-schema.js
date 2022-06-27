@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { Schema, model, ObjectId } = mongoose;
 
 const productSchema = new mongoose.Schema(
     {
@@ -33,11 +34,13 @@ const productSchema = new mongoose.Schema(
             required: [true, 'Image is required']
         },
 
-        farmerId:
+        farmer:
         {
-            type: String,
-            required: [false, 'FarmerId is required'],
+            type: ObjectId,
+            ref: 'Farmer',
+            required: [false, 'Farmer is required'],
         }
+
     });
 
 module.exports = mongoose.model("Product", productSchema);

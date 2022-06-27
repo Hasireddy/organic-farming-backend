@@ -6,6 +6,7 @@ const Product = require('../models/Product-schema.js');
 const asyncHandler = require('../utils/asyncHandler.js');
 const ErrorResponse = require('../utils/ErrorResponse.js');
 const verifyToken = require('../middlewares/verifyToken.js');
+const geocoder = require('../utils/geocoder');
 
 const registerFarmer = asyncHandler(async (req, res, next) => {
     /*
@@ -19,16 +20,30 @@ const registerFarmer = asyncHandler(async (req, res, next) => {
     send Token => res.json() res.set() res.cookie()
     */
     const { body: { email, password, ...rest } } = req;
-    // console.log(email, password, rest);
+    console.log(req.body);
     const found = await Farmer.findOne({ email });
     // console.log(farmer);
     if (found)
         throw new ErrorResponse('Farmer already exists', 403);
     const hash = await bcrypt.hash(password, 5);
-    // console.log(hash);
+    const fullAddress = req.body.address + ' ' + req.body.postcode + ' ' + req.body.countrycode;
+    console.log(fullAddress);
     //create farmer
-    const { _id } = await Farmer.create({ ...rest, email, password: hash });
+    const loc = await geocoder.geocode(fullAddress);
+    const location = {
+        type: 'Point',
+        coordinates: [loc[0].longitude, loc[0].latitude],
+        formattedAddress: loc[0].formattedAddress,
+        street: loc[0].streetName,
+        city: loc[0].city,
+        state: loc[0].stateCode,
+        zipcode: loc[0].zipcode,
+    }
+    console.log(location);
+    const { _id } = await Farmer.create({ ...rest, email, password: hash, location: location });
+    // const {_id} =  await Farmer.create({ ...rest, email, password: hash });
     const token = jwt.sign({ _id }, process.env.JWT_SECRET);
+    console.log(_id);
     res.json({ token });
     // console.log(newFarmer);
     // res.json({ success: 'Farmer registered' });
