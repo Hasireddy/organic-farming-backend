@@ -26,6 +26,11 @@ const FarmerSchema = new mongoose.Schema({
         minlength: 6
     },
 
+    farmName: {
+        type: String,
+        required: [true, 'FarmName is is required']
+    },
+
     address: {
         type: String,
         required: [true, 'Address is required']

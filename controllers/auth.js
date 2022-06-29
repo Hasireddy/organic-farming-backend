@@ -92,5 +92,31 @@ const productDetails = asyncHandler(async (req, res, next) => {
     console.log(product);
 });
 
+const getProductsByFarmerId = asyncHandler(async (req, res, next) => {
+    const { farmerId } = req;
+    let farmerProducts = await Product.find({ 'farmer': farmerId });
+    // farmerProducts = await farmerProducts.populate('farmer'); // To get the farmer details also ,please add farmer object in Productschema
+    if (farmerProducts.length === 0) { throw new ErrorResponse('No products found', 403); }
+    res.json({ farmerProducts: farmerProducts });
+    console.log(farmerProducts);
 
-module.exports = { registerFarmer, loginFarmer, getFarmer, productDetails };
+});
+
+// Deleting product with Farmer Id & ProductId
+const deleteProductByFIdPId = asyncHandler(async (req, res, next) => {
+    const { farmerId } = req;
+    const id = req.params.id
+    console.log(farmerId);
+    const found = await Product.find({ '_id': id, 'farmer': farmerId });
+
+    if (found.length === 0) {
+        throw new ErrorResponse(`Product with id of ${id} doesn't exist`, 404);
+    }
+    const deleteddPost = await (
+        await Product.findByIdAndDelete(id));
+    console.log(deleteddPost);
+    res.json({ success: `Product with id of ${id} was deleted` });
+});
+
+
+module.exports = { registerFarmer, loginFarmer, getFarmer, productDetails, getProductsByFarmerId, deleteProductByFIdPId };
