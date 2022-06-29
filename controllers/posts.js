@@ -39,6 +39,7 @@ const deletePost = asyncHandler(async (req, res, next) => {
     const found = await Farmer.findById(req.params.id);
     console.log(found);
     if (!found) throw new ErrorResponse(`farmer with id of ${req.params.id} doesn't exist`, 404);
+    //deleteddPost??
     const deleteddPost = await (
         await Farmer.findByIdAndDelete(req.params.id));
     res.json({ success: `Post with id of ${req.params.id} was deleted` });
