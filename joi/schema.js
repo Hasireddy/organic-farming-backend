@@ -7,7 +7,7 @@ const farmerSchema = Joi.object({
     password: Joi.string().alphanum().min(6).max(12).required(),
     address: Joi.string().required(),
     postcode: Joi.number().required(),
-    countrycode: Joi.number().required()
+    countrycode: Joi.string().required()
 
 });
 
@@ -22,9 +22,7 @@ const productSchema = Joi.object({
     Description: Joi.string().required(),
     Price: Joi.number().required(),
     Category: Joi.string().alphanum().min(6).max(12).required(),
-    FarmAddress: Joi.string().required(),
-    postcode: Joi.number().required()
-    // Image: Joi.image().required()
+    Image: Joi.object()
 
 })
 
