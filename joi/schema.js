@@ -22,7 +22,7 @@ const productSchema = Joi.object({
     ProductName: Joi.string().required(),
     Description: Joi.string().required(),
     Price: Joi.number().required(),
-    Category: Joi.string().alphanum().min(6).max(12).required(),
+    Category: Joi.string().alphanum().min(5).max(12).required(),
     Image: Joi.object()
 
 })

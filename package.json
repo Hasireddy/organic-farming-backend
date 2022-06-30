@@ -24,6 +24,7 @@
         "multer": "^1.4.5-lts.1",
         "node": "^17.7.2",
         "node-geocoder": "^4.1.0",
-        "nodemon": "^2.0.16"
+        "nodemon": "^2.0.16",
+        "supervisor": "^0.12.0"
     }
 }
