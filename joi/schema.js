@@ -6,8 +6,8 @@ const farmerSchema = Joi.object({
     email: Joi.string().required(),
     password: Joi.string().alphanum().min(6).max(12).required(),
     address: Joi.string().required(),
-    certificationNum: Joi.number().required(),
-    postcode: Joi.number().required()
+    postcode: Joi.number().required(),
+    countrycode: Joi.number().required()
 
 });
 

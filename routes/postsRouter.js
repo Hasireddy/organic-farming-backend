@@ -1,5 +1,5 @@
 const Router = require('express');
-// const router = require('express').Router();
+//const router = require('express').Router();
 const verifyToken = require('../middlewares/verifyToken.js');
 const validateJOI = require('../middlewares/validateJOI.js');
 const { farmerSchema } = require('../joi/schema.js');
