@@ -26,13 +26,13 @@ const createProduct = asyncHandler(async (req, res, next) => {
 
 const getSingleProduct = asyncHandler(async (req, res, next) => {
     // const { id } = req.params.id;
-    const product = await Product.findById(req.params.id);
+    const product = await Product.findById(req.params.id).populate('farmer');
     if (!product) throw new ErrorResponse(`product with id of ${req.params.id} doesn't exist`, 404);
     res.json(product);
 });
 
 const updateProduct = asyncHandler(async (req, res, next) => {
-
+    console.log(req.body);
     const found = await product.findById(req.params.id);
     console.log(found);
     if (!found) throw new ErrorResponse(`farmer with id of ${req.params.id} doesn't exist`, 404);
