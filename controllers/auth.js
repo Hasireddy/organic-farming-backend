@@ -92,5 +92,74 @@ const productDetails = asyncHandler(async (req, res, next) => {
     console.log(product);
 });
 
+const getProductsByFarmerId = asyncHandler(async (req, res, next) => {
+    const { farmerId } = req;
+    console.log(farmerId);
+    let farmerProducts = await Product.find({ 'farmer': farmerId });
+    // farmerProducts = await farmerProducts.populate('farmer'); // To get the farmer details also ,please add farmer object in Productschema
+    console.log(farmerProducts);
+    if (farmerProducts.length === 0) { throw new ErrorResponse('No products found', 403); }
+    res.json({ farmerProducts: farmerProducts });
 
-module.exports = { registerFarmer, loginFarmer, getFarmer, productDetails };
+
+});
+
+// Deleting product with Farmer Id & ProductId
+const deleteProductByFIdPId = asyncHandler(async (req, res, next) => {
+    const { farmerId } = req;
+    const id = req.params.id
+    console.log(farmerId);
+    const found = await Product.find({ '_id': id, 'farmer': farmerId });
+
+    if (found.length === 0) {
+        throw new ErrorResponse(`Product with id of ${id} doesn't exist`, 404);
+    }
+    const deleteddPost = await (
+        await Product.findByIdAndDelete(id));
+    // console.log(deleteddPost);
+    res.json({ success: `Product with id of ${id} was deleted` });
+});
+
+
+//  Updating product with Farmer Id & ProductId
+
+
+const updateProductByFIdPId = asyncHandler(async (req, res, next) => {
+    console.log("req");
+    const { farmerId } = req;
+    const id = req.params.id
+    console.log("updates");
+    console.log("req.body");
+    const updates = req.body;
+
+
+    // console.log(req);
+    const options = { new: true }
+    const found = await Product.find({ '_id': id, 'farmer': farmerId, });
+
+    if (found.length === 0) {
+        throw new ErrorResponse(`Product with id of ${id} doesn't exist`, 404);
+    }
+    else {
+        const updatedPost = await (
+            await Product.findByIdAndUpdate(id, updates, options));
+        console.log("updatedPost");
+        console.log(updatedPost);
+        res.json(updatedPost);
+        res.json({ success: `Product with id of ${id} was updated` });
+    }
+});
+
+
+//getting single product by Farmer and product id
+
+const getSingleProductByFIdPId = asyncHandler(async (req, res, next) => {
+    const { farmerId } = req;
+    const id = req.params.id
+    const product = await Product.findById({ '_id': id, 'farmer': farmerId });
+    if (!product) throw new ErrorResponse(`product with id of ${req.params.id} doesn't exist`, 404);
+    res.json(product);
+});
+
+
+module.exports = { registerFarmer, loginFarmer, getFarmer, productDetails, getProductsByFarmerId, deleteProductByFIdPId, updateProductByFIdPId, getSingleProductByFIdPId };
