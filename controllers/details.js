@@ -10,6 +10,20 @@ const getAllProducts = asyncHandler(async (req, res, next) => {
     res.json(posts);
 });
 
+const getAllProductsByFarmerId = asyncHandler(async (req, res, next) => {
+    // const posts = await Product.find().populate('farmer');
+    // res.json(posts);
+    console.log(req);
+    const id = req.params.id;
+    console.log(id);
+    let farmerProducts = await Product.find({ 'farmer': id });
+    // farmerProducts = await farmerProducts.populate('farmer'); // To get the farmer details also ,please add farmer object in Productschema
+    console.log(farmerProducts);
+    if (farmerProducts.length === 0) { throw new ErrorResponse('No products found', 403); }
+    res.json({ farmerProducts: farmerProducts });
+
+});
+
 
 const createProduct = asyncHandler(async (req, res, next) => {
     const { body, file, farmerId } = req;
@@ -54,4 +68,4 @@ const deleteProduct = asyncHandler(async (req, res, next) => {
 
 
 
-module.exports = { getAllProducts, createProduct, getSingleProduct, updateProduct, deleteProduct };
+module.exports = { getAllProducts, createProduct, getSingleProduct, updateProduct, deleteProduct, getAllProductsByFarmerId };

@@ -30,6 +30,8 @@ const {
     getSingleProduct,
     updateProduct,
     deleteProduct,
+    getAllProductsByFarmerId
+
 } = require("../controllers/details.js");
 
 const productsRouter = Router();
@@ -55,5 +57,9 @@ productsRouter
     .get(getSingleProduct)
     .put(verifyToken, updateProduct)
     .delete(verifyToken, deleteProduct);
+
+productsRouter.get('/getAllProductsByFarmerId/:id', getAllProductsByFarmerId);
+
+
 
 module.exports = productsRouter;

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { Schema, model, ObjectId } = mongoose;
 
 const FarmerSchema = new mongoose.Schema({
     firstname: {
@@ -61,6 +62,10 @@ const FarmerSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now
+    },
+    searchitem: {
+        type: String,
+        required: [false, 'searchitem is required']
     }
 
 });
