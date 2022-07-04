@@ -1,24 +1,19 @@
 const Router = require("express");
 const multer = require('multer');
-// const FirebaseStorage = require('multer-firebase-storage');
+const FirebaseStorage = require('multer-firebase-storage');
 
-// const multer = Multer({
-//     storage: FirebaseStorage({
-//         bucketName: 'organic-farming-589f2.appspot.com',
-//         credentials: {
-//             clientEmail: 'malikireddy.uma@gmail.com',
-//             privateKey: 'AIzaSyDWCvWVWQ0I_EiSEBlrWyjcsxpwdScimco',
-//             projectId: 'organic-farming-589f2'
-//         }
-//     })
-// })
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, './uploads/');
+
+
+const storage = FirebaseStorage({
+    bucketName: process.env.FIREBASE_BUCKETNAME,
+    credentials: {
+        clientEmail: process.env.FIREBASE_CLIENTEMAIL,
+        privateKey: process.env.FIREBASE_PRIVATEKEY.replace(/\\n/g, "\n"),
+        projectId: process.env.FIREBASE_PROJECTID
     },
-    filename: function (req, file, cb) {
-        cb(null, file.originalname);
-    }
+    public: true,
+    unique: true
+
 })
 const upload = multer({ storage: storage });
 const verifyToken = require("../middlewares/verifyToken.js");
@@ -44,7 +39,7 @@ productsRouter
         upload.single("Image"),
         (req, res, next) => {
             // //console.log("body", req.farmerId, req.file);
-            Image: req.file.path;
+
             if (!req.file) next(new Error("Please upload an image"));
             next();
         },

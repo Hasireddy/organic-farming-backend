@@ -34,7 +34,7 @@ const createProduct = asyncHandler(async (req, res, next) => {
     const found = await Product.findOne({ 'ProductName': tempProductName, 'farmer': farmerId });
     ////console.log(found);
     if (found) { throw new ErrorResponse('ProductName already exists', 403); }
-    let newProduct = await Product.create({ ...body, Image: file, farmer: farmerId });
+    let newProduct = await Product.create({ ...body, Image: { publicUrl: file.publicUrl }, farmer: farmerId });
     newProduct = await newProduct.populate('farmer');
     //console.log('New Added Product =', newProduct);
     res.status(201).json(newProduct);
