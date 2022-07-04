@@ -26,7 +26,7 @@ require('colors')
 const authRouter = require('./routes/authRouter.js');
 const mapsRouter = require('./routes/mapsRouter.js');
 const productsRouter = require('./routes/productsRouter.js');
-const errorHandler = require('./middlewares/errorHandler.js');
+const errorHandler = require('./middlewares/ErrorHandler.js');
 const connectDB = require('./dbconnect.js');
 const { getEventListeners } = require('events');
 connectDB()
