@@ -1,5 +1,17 @@
 const Router = require("express");
 const multer = require('multer');
+// const FirebaseStorage = require('multer-firebase-storage');
+
+// const multer = Multer({
+//     storage: FirebaseStorage({
+//         bucketName: 'organic-farming-589f2.appspot.com',
+//         credentials: {
+//             clientEmail: 'malikireddy.uma@gmail.com',
+//             privateKey: 'AIzaSyDWCvWVWQ0I_EiSEBlrWyjcsxpwdScimco',
+//             projectId: 'organic-farming-589f2'
+//         }
+//     })
+// })
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './uploads/');
@@ -18,6 +30,8 @@ const {
     getSingleProduct,
     updateProduct,
     deleteProduct,
+    getAllProductsByFarmerId
+
 } = require("../controllers/details.js");
 
 const productsRouter = Router();
@@ -43,5 +57,9 @@ productsRouter
     .get(getSingleProduct)
     .put(verifyToken, updateProduct)
     .delete(verifyToken, deleteProduct);
+
+productsRouter.get('/getAllProductsByFarmerId/:id', getAllProductsByFarmerId);
+
+
 
 module.exports = productsRouter;
