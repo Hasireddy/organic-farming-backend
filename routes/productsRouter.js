@@ -43,7 +43,7 @@ productsRouter
         verifyToken,
         upload.single("Image"),
         (req, res, next) => {
-            // console.log("body", req.farmerId, req.file);
+            // //console.log("body", req.farmerId, req.file);
             Image: req.file.path;
             if (!req.file) next(new Error("Please upload an image"));
             next();
