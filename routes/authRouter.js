@@ -24,8 +24,8 @@ authRouter.delete('/deleteProductByFIdPId/:id', verifyToken, deleteProductByFIdP
 authRouter.get('/getSingleProductByFIdPId/:id', verifyToken, getSingleProductByFIdPId);
 authRouter.put('/updateProductByFIdPId/:id', verifyToken, upload.single("Image"),
     (req, res, next) => {
-        console.log("req.file.path");
-        console.log(req);
+        //console.log("req.file.path");
+        //console.log(req);
         //console(req.file.path);
         Image: req.file.path;
         if (!req.file) next(new Error("Please upload an image"));

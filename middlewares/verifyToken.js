@@ -13,8 +13,8 @@ const verifyToken = asyncHandler(async (req, res, next) => {
     if (!farmer) throw new ErrorResponse('Please login', 401);
 
     req.farmerId = _id;
-    console.log("verify tocken");
-    console.log(req.farmerId);
+    //console.log("verify tocken");
+    //console.log(req.farmerId);
     next();
 });
 

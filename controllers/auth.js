@@ -20,14 +20,14 @@ const registerFarmer = asyncHandler(async (req, res, next) => {
     send Token => res.json() res.set() res.cookie()
     */
     const { body: { email, password, ...rest } } = req;
-    console.log(req.body);
+    //console.log(req.body);
     const found = await Farmer.findOne({ email });
-    // console.log(farmer);
+    // //console.log(farmer);
     if (found)
         throw new ErrorResponse('Farmer already exists', 403);
     const hash = await bcrypt.hash(password, 5);
     const fullAddress = req.body.address + ' ' + req.body.postcode + ' ' + req.body.countrycode;
-    console.log(fullAddress);
+    //console.log(fullAddress);
     //create farmer
     const loc = await geocoder.geocode(fullAddress);
     const location = {
@@ -39,13 +39,13 @@ const registerFarmer = asyncHandler(async (req, res, next) => {
         state: loc[0].stateCode,
         zipcode: loc[0].zipcode,
     }
-    console.log(location);
+    //console.log(location);
     const { _id } = await Farmer.create({ ...rest, email, password: hash, location: location });
     // const {_id} =  await Farmer.create({ ...rest, email, password: hash });
     const token = jwt.sign({ _id }, process.env.JWT_SECRET);
-    console.log(_id);
+    //console.log(_id);
     res.json({ token });
-    // console.log(newFarmer);
+    // //console.log(newFarmer);
     // res.json({ success: 'Farmer registered' });
 });
 
@@ -66,7 +66,7 @@ const loginFarmer = asyncHandler(async (req, res, next) => {
     const found = await Farmer.findOne({ email }).select('+password'); //In farmer-details.js we have given password select as false.So we have to add explicitily here.By using this Mongoose prevents accidentally giving the Passsword.
     if (!found) throw new ErrorResponse(`Farmer doesn't exist`, 404);
     const match = await bcrypt.compare(password, found.password) //verifying password
-    console.log(match);
+    //console.log(match);
     if (!match) throw new ErrorResponse('Password is incorrect', 400); //Checking if password matches or not.
     const token = jwt.sign({ _id: found._id }, process.env.JWT_SECRET); // If password matches create & send token.
     res.json({ token });
@@ -89,15 +89,15 @@ const productDetails = asyncHandler(async (req, res, next) => {
     if (found) { throw new ErrorResponse('ProductName already exists', 403); }
     const product = await Product.create({ ...rest, ProductName, Description });
     res.json({ product: product });
-    console.log(product);
+    //console.log(product);
 });
 
 const getProductsByFarmerId = asyncHandler(async (req, res, next) => {
     const { farmerId } = req;
-    console.log(farmerId);
+    //console.log(farmerId);
     let farmerProducts = await Product.find({ 'farmer': farmerId });
     // farmerProducts = await farmerProducts.populate('farmer'); // To get the farmer details also ,please add farmer object in Productschema
-    console.log(farmerProducts);
+    //console.log(farmerProducts);
     if (farmerProducts.length === 0) { throw new ErrorResponse('No products found', 403); }
     res.json({ farmerProducts: farmerProducts });
 
@@ -108,7 +108,7 @@ const getProductsByFarmerId = asyncHandler(async (req, res, next) => {
 const deleteProductByFIdPId = asyncHandler(async (req, res, next) => {
     const { farmerId } = req;
     const id = req.params.id
-    console.log(farmerId);
+    //console.log(farmerId);
     const found = await Product.find({ '_id': id, 'farmer': farmerId });
 
     if (found.length === 0) {
@@ -116,7 +116,7 @@ const deleteProductByFIdPId = asyncHandler(async (req, res, next) => {
     }
     const deleteddPost = await (
         await Product.findByIdAndDelete(id));
-    // console.log(deleteddPost);
+    // //console.log(deleteddPost);
     res.json({ success: `Product with id of ${id} was deleted` });
 });
 
@@ -125,15 +125,15 @@ const deleteProductByFIdPId = asyncHandler(async (req, res, next) => {
 
 
 const updateProductByFIdPId = asyncHandler(async (req, res, next) => {
-    console.log("req");
+    //console.log("req");
     const { farmerId } = req;
     const id = req.params.id
-    console.log("updates");
-    console.log("req.body");
+    //console.log("updates");
+    //console.log("req.body");
     const updates = req.body;
 
 
-    // console.log(req);
+    // //console.log(req);
     const options = { new: true }
     const found = await Product.find({ '_id': id, 'farmer': farmerId, });
 
@@ -143,8 +143,8 @@ const updateProductByFIdPId = asyncHandler(async (req, res, next) => {
     else {
         const updatedPost = await (
             await Product.findByIdAndUpdate(id, updates, options));
-        console.log("updatedPost");
-        console.log(updatedPost);
+        //console.log("updatedPost");
+        //console.log(updatedPost);
         res.json(updatedPost);
         res.json({ success: `Product with id of ${id} was updated` });
     }

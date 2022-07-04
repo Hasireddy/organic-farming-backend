@@ -13,9 +13,9 @@ const getAllFarmerswithsearchproducts = asyncHandler(async (req, res, next) => {
         farmer["searchitem"] = await getproductssearchtext(farmer._id);
         farmersarraywithsearchtext.push(farmer);
     };
-    // console.log('====================================');
-    // console.log(farmersarraywithsearchtext);
-    // console.log('====================================');
+    // //console.log('====================================');
+    // //console.log(farmersarraywithsearchtext);
+    // //console.log('====================================');
     res.json(farmersarraywithsearchtext);
 });
 
@@ -23,13 +23,13 @@ const getproductssearchtext = asyncHandler(async (farmid) => {
     let farmerProducts = await Product.find({ 'farmer': farmid });
     let searchitem = '';
     farmerProducts.forEach(product => {
-        //  console.log(product.ProductName + ' ' + product.Category);
+        //  //console.log(product.ProductName + ' ' + product.Category);
         searchitem += (product.ProductName + ' ' + product.Category);
     });
-    // console.log('====================================');
-    // console.log(farmName);
-    // console.log(searchitem);
-    // console.log('====================================');
+    // //console.log('====================================');
+    // //console.log(farmName);
+    // //console.log(searchitem);
+    // //console.log('====================================');
     return searchitem;
 
 });
@@ -50,7 +50,7 @@ const getproductssearchtext = asyncHandler(async (farmid) => {
 // const updatePost = asyncHandler(async (req, res, next) => {
 
 //     const found = await Farmer.findById(req.params.id);
-//     console.log(found);
+//     //console.log(found);
 //     if (!found) throw new ErrorResponse(`farmer with id of ${req.params.id} doesn't exist`, 404);
 //     const updatedPost = await (
 //         await Farmer.findOneAndUpdate(req.params.id, req.body, { new: true }));
@@ -61,7 +61,7 @@ const getproductssearchtext = asyncHandler(async (farmid) => {
 // const deletePost = asyncHandler(async (req, res, next) => {
 
 //     const found = await Farmer.findById(req.params.id);
-//     console.log(found);
+//     //console.log(found);
 //     if (!found) throw new ErrorResponse(`farmer with id of ${req.params.id} doesn't exist`, 404);
 //     const deleteddPost = await (
 //         await Farmer.findByIdAndDelete(req.params.id));
