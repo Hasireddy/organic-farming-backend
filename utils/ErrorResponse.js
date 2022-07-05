@@ -1,3 +1,4 @@
+//Error Handle
 class ErrorResponse extends Error {
     constructor(message, statusCode) {
         super(message);

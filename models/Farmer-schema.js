@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { Schema, model, ObjectId } = mongoose;
 
 const FarmerSchema = new mongoose.Schema({
     firstname: {
@@ -26,17 +27,47 @@ const FarmerSchema = new mongoose.Schema({
         minlength: 6
     },
 
+    farmName: {
+        type: String,
+        required: [true, 'FarmName is is required']
+    },
+
     address: {
         type: String,
         required: [true, 'Address is required']
     },
 
-   
-
     postcode: {
         type: Number,
         required: [true, 'Postal code is required']
+
+    },
+    countrycode: {
+        type: String,
+        required: [true, 'Country code is required'],
+        minlength: 2,
+        maxlength: 2
+    },
+    location: {
+        type: {
+            type: String,
+            enum: ['Point']
+        },
+        coordinates: {
+            type: [Number],
+            index: '2dsphere'
+        },
+        formattedAddress: String
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    },
+    searchitem: {
+        type: String,
+        required: [false, 'searchitem is required']
     }
+
 });
 
 module.exports = mongoose.model("Farmer", FarmerSchema);
