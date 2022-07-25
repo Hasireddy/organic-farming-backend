@@ -1,0 +1,104 @@
+#aboutCtn {
+    background: url(../assets/slidecoffee.jpg) no-repeat;
+    background-size: cover;
+    opacity: 0.9;
+}
+
+#cardAbout {
+    background-color: rgb(241, 241, 184) !important;
+    border-radius: 10px;
+    box-shadow: 3px 5px 10px #bda4a4;
+    padding-top: 25px;
+    margin-left: 75px !important;
+    margin-right: 75px !important;
+}
+
+#aboutTitle1 {
+    background-color: rgb(173, 46, 68);
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    font-family: Gothic;
+}
+
+#aboutTitle2 {
+    background-color: rgb(6, 92, 6);
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    font-family: Gothic;
+}
+
+#aboutTitle3 {
+    background-color: rgb(83, 55, 161);
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    font-family: Gothic;
+}
+
+#cardHeader {
+    background-color: rgb(6, 99, 6) !important;
+    height: 200px;
+    color: white;
+    font-family: Times New Roman;
+    /* margin-bottom: 50px; */
+    box-shadow: 3px 5px 10px #bda4a4;
+    font-size: 75px;
+}
+
+#uma {
+    border-radius: 50%;
+    background-color: white;
+    width: 200px;
+    padding-top: 20px;
+}
+
+#isaiah {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    padding-top: 20px;
+    background-color: white;
+}
+
+#ercan {
+    border-radius: 50%;
+    background-color: white;
+    width: 200px;
+}
+
+.linkedIn {
+    color: blue
+}
+
+.textAreaContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 75px;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    color: white;
+    /* font-weight: bold; */
+    letter-spacing: .1rem;
+}
+
+#textAreaFooter {
+    margin: auto;
+    font-size: 18px;
+}
+
+.card-header {
+    font-size: 50px;
+    background: none;
+    background-color: rgb(28, 41, 28) !important;
+    color: white;
+    font-family: Times New Roman;
+    height: 100px;
+    padding-top: 20px;
+    margin-bottom: 20px;
+}
+
+. {
+    padding-top: 250px;
+}

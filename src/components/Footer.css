@@ -1,0 +1,28 @@
+.footerContainer {
+    background-color: #1DB82C !important;
+    border-bottom: #165c1c solid 50px;
+    color: rgb(5, 5, 5);
+    font-size: small;
+    padding-top: 35px;
+}
+
+.footer-title {
+    color: rgb(10, 10, 10);
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.nav-footer {
+    color: rgb(15, 15, 15) !important;
+    font-size: small;
+    justify-content: center;
+}
+
+.bi{
+    color: black;
+}
+
+#textAreaFooter{
+    width: 600px;
+}
+

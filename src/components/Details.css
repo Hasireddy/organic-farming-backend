@@ -1,0 +1,11 @@
+/* style={{ backgroundImage: `url(${image}` }} */
+
+.container-fluid {
+    width: 100%;
+    background-color: rgb(228, 240, 228);
+    background-size: cover;
+}
+
+.row {
+    padding-left: 50px;
+}

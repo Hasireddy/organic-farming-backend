@@ -1,0 +1,31 @@
+#dashboardCard{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#dashboardCb{
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#dashboardFooter{
+    display: flex;
+    justify-content: space-around;
+    justify-items: center;
+    background-color: #165c1c;
+    width: 100%;
+}
+
+#dbtitle{
+    font-weight: bold;
+}
+
+#dashboardBtn{
+    border-radius: 8px;
+    border:1px green solid !important;
+}
