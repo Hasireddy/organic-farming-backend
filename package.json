@@ -26,7 +26,7 @@
         "multer-firebase-storage": "^3.0.3",
         "node": "^17.7.2",
         "node-geocoder": "^4.1.0",
-        "nodemon": "^2.0.16",
+        "nodemon": "^1.3.3",
         "supervisor": "^0.12.0"
     }
 }
